@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jamal Miller | IT Student and Aspiring Network Engineer</title>
+<meta name="description" content="Portfolio of Jamal Miller, Information Technology student at William Paterson University.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0d1520;
+    --surface: #152233;
+    --ink: #e8eef5;
+    --muted: #a3b3c5;
+    --line: #26384d;
+    --accent: #4cc2ff;
+    --accent2: #ffb454;
+    --accent-ink: #06121f;
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; }
+
+  /* Navigation */
+  nav { border-bottom: 1px solid var(--line); background: var(--surface); }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; padding-top: .9rem; padding-bottom: .9rem; gap: 1rem; flex-wrap: wrap; }
+  nav .brand { font-family: var(--display); font-weight: 700; color: var(--ink); text-decoration: none; }
+  nav ul { list-style: none; display: flex; gap: 1.4rem; margin: 0; padding: 0; }
+  nav ul a { color: var(--muted); text-decoration: none; font-weight: 600; }
+  nav ul a:hover { color: var(--accent); }
+
+  /* Header / hero */
+  header.hero { padding: 4.5rem 0 4rem; }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center; }
+  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); font-weight: 700; letter-spacing: -0.02em; }
+  .hero .role { font-size: 1.35rem; color: var(--muted); margin: 1rem 0 2rem; max-width: 30ch; }
+  .btn {
+    display: inline-block; padding: .75rem 1.4rem; border-radius: 6px; font-weight: 600;
+    text-decoration: none; background: var(--accent); color: var(--accent-ink);
+  }
+  .btn.ghost { background: transparent; color: var(--accent); border: 2px solid var(--accent); margin-left: .6rem; }
+  .topology { width: 100%; height: auto; }
+  .topology .link { stroke: var(--accent); stroke-width: 2; fill: none; }
+  .topology .node { fill: var(--surface); stroke: var(--ink); stroke-width: 2; }
+  .topology .core { fill: var(--accent2); stroke: var(--accent2); }
+  .topology text { font-family: var(--body); font-size: 13px; fill: var(--ink); font-weight: 600; text-anchor: middle; }
+
+  /* Sections */
+  section { padding: 4rem 0; border-top: 1px solid var(--line); }
+  section h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 1.5rem; }
+  .about p { max-width: 62ch; margin: 0 0 1rem; }
+
+  /* Skills */
+  .skill-groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .skill-groups h3 { font-size: 1.2rem; margin-bottom: .75rem; color: var(--accent2); }
+  .skill-groups ul { margin: 0; padding-left: 1.1rem; }
+  .skill-groups li { margin-bottom: .5rem; }
+
+  /* Projects */
+  .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    padding: 1.6rem; display: flex; flex-direction: column;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none; }
+    .card:hover { transform: none; }
+  }
+  .card h3 { font-size: 1.3rem; margin-bottom: .6rem; }
+  .card p { margin: 0 0 1rem; color: var(--muted); }
+  .card .tags { margin-top: auto; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: .4rem; }
+  .card .tags li { font-size: .9rem; border: 1px solid var(--line); border-radius: 999px; padding: .1rem .7rem; color: var(--ink); }
+
+  /* Contact */
+  .contact ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  footer { padding: 2rem 0 3rem; color: var(--muted); font-size: .95rem; border-top: 1px solid var(--line); }
+
+  /* Responsive */
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; }
+    .skill-groups, .project-grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">Jamal Miller</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>Jamal Miller</h1>
+      <p class="role">Information Technology student at William Paterson University, working toward a career in network engineering.</p>
+      <a class="btn" href="#projects">See my projects</a>
+      <a class="btn ghost" href="#contact">Get in touch</a>
+    </div>
+    <svg class="topology" viewBox="0 0 400 320" role="img" aria-label="Simple network diagram: the internet connects to a router, then a switch, then a NAS, a PC, and a laptop.">
+      <path class="link" d="M200 50 L200 105"/>
+      <path class="link" d="M200 135 L200 185"/>
+      <path class="link" d="M200 185 L80 255"/>
+      <path class="link" d="M200 185 L200 255"/>
+      <path class="link" d="M200 185 L320 255"/>
+      <circle class="node" cx="200" cy="35" r="22"/>
+      <text x="200" y="20" dy="-6">Internet</text>
+      <rect class="node core" x="170" y="105" width="60" height="30" rx="6"/>
+      <text x="262" y="125">Router</text>
+      <rect class="node" x="170" y="170" width="60" height="30" rx="6"/>
+      <text x="262" y="190">Switch</text>
+      <rect class="node" x="55" y="255" width="50" height="34" rx="6"/>
+      <text x="80" y="308">NAS</text>
+      <rect class="node" x="175" y="255" width="50" height="34" rx="6"/>
+      <text x="200" y="308">PC</text>
+      <rect class="node" x="295" y="255" width="50" height="34" rx="6"/>
+      <text x="320" y="308">Laptop</text>
+    </svg>
+  </div>
+</header>
+
+<main>
+  <section id="about" class="about">
+    <div class="wrap">
+      <h2>About me</h2>
+      <p>I'm an Information Technology major at William Paterson University. I enjoy all things tech, from building and fixing computers to figuring out how networks connect everything together.</p>
+      <p>My goal is to find full-time work after graduation and grow into a Network Engineer. Outside of tech, I love video games and spending time traveling with my family.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <div class="skill-groups">
+        <div>
+          <h3>Computers and devices</h3>
+          <ul>
+            <li>Windows 10/11 troubleshooting</li>
+            <li>Hardware setup, PC upgrades, and peripherals</li>
+            <li>Printer installation and troubleshooting</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Networking and storage</h3>
+          <ul>
+            <li>Network topologies, IP addressing, and troubleshooting</li>
+            <li>NAS setup, shared folders, users, and permissions</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Support</h3>
+          <ul>
+            <li>POS systems and store technology support</li>
+            <li>Customer support, documentation, and escalation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <h2>Projects</h2>
+      <div class="project-grid">
+        <!-- Edit the descriptions below so they match what you actually built. -->
+        <article class="card">
+          <h3>Home ticketing site on a NAS</h3>
+          <p>A support ticketing site that runs on my own NAS server at home, built to track and manage requests in one place.</p>
+          <ul class="tags"><li>NAS</li><li>Web hosting</li><li>Ticketing</li></ul>
+        </article>
+        <article class="card">
+          <h3>Small office network at home</h3>
+          <p>A physical small office network that I built at home, including the cabling, devices, and IP addressing.</p>
+          <ul class="tags"><li>Networking</li><li>IP addressing</li><li>Hardware</li></ul>
+        </article>
+        <article class="card">
+          <h3>Campus network in Packet Tracer</h3>
+          <p>A campus network design created in Cisco Packet Tracer to plan how buildings and devices connect.</p>
+          <ul class="tags"><li>Packet Tracer</li><li>Network design</li><li>Topology</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <ul>
+        <li><a href="mailto:millerj32@student.wpunj.edu">Email</a></li>
+        <li><a href="https://github.com/Jay-Milton2026">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/jamal-miller-82a1891a/">LinkedIn</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">&copy; 2026 Jamal Miller</div>
+</footer>
+
+</body>
+</html>
